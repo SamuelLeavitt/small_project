@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS contacts (
   last_name VARCHAR(50) NOT NULL,
   phone_number VARCHAR(15) NOT NULL,
   email VARCHAR(254) NOT NULL,
-  creation_date VARCHAR(8),
+  creation_date DATE DEFAULT (CURRENT_DATE()),
   user_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   PRIMARY KEY (id)
 ) ENGINE = InnoDB;
