@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
   username VARCHAR(50) NOT NULL,
   email VARCHAR(254) NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id),
+  CONSTRAINT users_pkey PRIMARY KEY (id),
   UNIQUE (username),
   UNIQUE (email)
 ) ENGINE = InnoDB;
@@ -21,6 +21,6 @@ CREATE TABLE IF NOT EXISTS contacts (
   email VARCHAR(254) NOT NULL,
   creation_date DATE DEFAULT (CURRENT_DATE()),
   user_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-  PRIMARY KEY (id)
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT contacts_pkey PRIMARY KEY (id)
 ) ENGINE = InnoDB;
