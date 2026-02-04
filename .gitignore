@@ -1,5 +1,13 @@
-# WIP
 *.swp
 *.db
 *.dump
 *.log
+
+# Replit
+.replit
+replit.md
+
+# Colors
+AddColor.php
+Login.php
+SearchColors.php
