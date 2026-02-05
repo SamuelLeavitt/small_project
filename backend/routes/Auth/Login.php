@@ -9,7 +9,7 @@ require_once '../../connection.php';
 
 $inData = json_decode(file_get_contents('php://input'), true);
 
-$username = $inData['username'];
+$username = $inData['suername'];
 $password = $inData['password'];
 
 
@@ -23,11 +23,23 @@ if ($conn->connect_error) {
 $stmt = $conn->prepare("SELECT id, username, email, password_hash FROM users WHERE username=?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
+
+
+// returns false if no rows found and true if found. This does not return a value yet.
+// Allows to get the actual row data and use functions like fetch_assoc(). 
 $result = $stmt->get_result();
 
+
+// if there is anything result->fetch_assoc() returns a row array
+// If the result is empty (no rows found), fetch_assoc() returns false.
+
 if ($row = $result->fetch_assoc()) {
+// It takes the plain password from the frontend (user input).
+// It takes the hashed password from the database ($row['password_hash']).
+// It checks if the plain password, when hashed, matches the stored hash.
     if (password_verify($password, $row['password_hash'])) {
         sendResultInfoAsJson(json_encode([
+            // $json is now: {"success":true,"username":"alice"}
             "success" => true,
             "id" => $row['id'],
             "username" => $row['username'],
@@ -44,6 +56,7 @@ if ($row = $result->fetch_assoc()) {
 $stmt->close();
 $conn->close();
 
+//sends a JSON response back to the frontend
 function sendResultInfoAsJson($obj) {
     header('Content-type: application/json');
     echo $obj;
