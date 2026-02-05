@@ -9,7 +9,7 @@ require_once '../../connection.php';
 
 $inData = json_decode(file_get_contents('php://input'), true);
 
-$username = $inData['suername'];
+$username = $inData['username'];
 $password = $inData['password'];
 
 
@@ -33,13 +33,15 @@ $result = $stmt->get_result();
 // if there is anything result->fetch_assoc() returns a row array
 // If the result is empty (no rows found), fetch_assoc() returns false.
 
+// if more than one username exists (should not happen), only the first is checked. 
+// and if we had to use multiples of them we would use while loop.
 if ($row = $result->fetch_assoc()) {
 // It takes the plain password from the frontend (user input).
 // It takes the hashed password from the database ($row['password_hash']).
 // It checks if the plain password, when hashed, matches the stored hash.
     if (password_verify($password, $row['password_hash'])) {
         sendResultInfoAsJson(json_encode([
-            // $json is now: {"success":true,"username":"alice"}
+            // $json is now: {"success":true,"username":"anyname","email":"anyemail","error":""}
             "success" => true,
             "id" => $row['id'],
             "username" => $row['username'],
@@ -47,16 +49,21 @@ if ($row = $result->fetch_assoc()) {
             "error" => ""
         ]));
     } else {
-        sendResultInfoAsJson(json_encode(["error" => "Invalid password"]));
+        sendResultInfoAsJson(json_encode([
+            "success" => false,
+            "error" => "Invalid password"]));
     }
 } else {
-    sendResultInfoAsJson(json_encode(["error" => "User not found"]));
+    sendResultInfoAsJson(json_encode([
+        "success" => false,
+        "error" => "User not found"]));
 }
 
 $stmt->close();
 $conn->close();
 
-//sends a JSON response back to the frontend
+// This tells the browser (or client) that the response will be in JSON format, not plain text or HTML. 
+// It sets the HTTP Content-Type header.
 function sendResultInfoAsJson($obj) {
     header('Content-type: application/json');
     echo $obj;

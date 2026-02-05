@@ -22,8 +22,12 @@ $password_hash = password_hash($password, PASSWORD_DEFAULT);
 $stmt = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
 $stmt->bind_param("sss", $username, $email, $password_hash);
 
+// For inserts/updates/deletes, WE must check execute() to know if the DB accepted our change.
+// For selects(Login), we check the result rows to see if we found what we wanted.
+
 if ($stmt->execute()) {
     sendResultInfoAsJson('{"success":true}');
+    // maybe make it say what is wrong instead of just error
 } else {
     sendResultInfoAsJson('{"error":"Registration failed"}');
 }
