@@ -31,7 +31,7 @@ function openAdd() {
 //open edit function
 function openEdit(id) {
   const c = contacts.find(x => x.id === id);
-
+  if (!c) return;
   editingId = id;
 
   //fill inputs from contact object
