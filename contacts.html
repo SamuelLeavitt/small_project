@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Contact Manager</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/contacts.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Contact Records</h1>
+    <button id="addContactBtn" type="button">Add Contact</button>
+    <button id="logoutBtn" type="button">Log Out</button>
+  </header>
+
+  <input type="text" id="searchInput" placeholder="Search Contacts" />       
+  <button type="button" id="searchBtn">Search</button>
+
+  <table id="contactsTable">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="contactsBody"></tbody>
+  </table>
+
+  <div id="contactModal" class="hidden">
+    <form id="contactForm">
+      <h2 id="formTitle">Add Contact</h2>
+
+      <input id="firstName" name="firstName" placeholder="First Name" required />
+      <input id="lastName" name="lastName" placeholder="Last Name" required />
+      <input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required />
+      <input id="email" name="email" placeholder="Email" type="email" required />
+      
+      <button type="submit">Save Contact</button>
+      <button type="button" id="cancelBtn">Cancel</button>
+
+    </form>
+  </div>
+</body>
+</html>
