@@ -57,6 +57,55 @@ function closeModal() {
   if (title) title.textContent = "Add Contact";
 }
 
+//contact rendering function
+function renderContacts() {
+  //clear the table body
+  contactsBody.innerHTML = "";
+
+  //go through every contact
+  contacts.forEach(contact => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${contact.first_name}</td>
+      <td>${contact.last_name}</td>
+      <td>${contact.phone_number}</td>
+      <td>${contact.email}</td>
+      <td>
+        <button class="editBtn" data-id="${contact.id}">Edit</button>
+        <button class="deleteBtn" data-id="${contact.id}">Delete</button>
+      </td>
+    `;
+
+    contactsBody.appendChild(row);
+  });
+
+  attachRowEvents();
+}
+
+//function for attaching edit and delete button functionality
+function attachRowEvents() {
+
+  //for edit
+  document.querySelectorAll(".editBtn").forEach(btn => {
+    btn.onclick = () => {
+      const id = Number(btn.dataset.id);
+      openEdit(id);
+    };
+  });
+
+  //for delete
+  document.querySelectorAll(".deleteBtn").forEach(btn => {
+    btn.onclick = () => {
+      const id = Number(btn.dataset.id);
+
+      contacts = contacts.filter(c => c.id !== id);
+      renderContacts();
+    };
+  });
+
+}
+
 //form submission functionality: when form is submitted, gather data and save contact (add or edit) - in progress 
 form.onsubmit = async (e) => {
 
