@@ -8,7 +8,7 @@ $inData = json_decode(file_get_contents('php://input'), true);
 //$contactId = $inData['contact_id'];
 
 // user_id comes from the decoded JWT in Middleware.php and ensures user fetches only their own contacts
-$stmt = $conn->prepare("SELECT id, first_name, last_name, email, phone FROM contacts WHERE user_id = ?");
+$stmt = $conn->prepare("SELECT id, first_name, last_name, email, phone_number FROM contacts WHERE user_id = ?");
 // userId comes from the decoded JWT in Middleware.php
 $stmt->bind_param("i",$userId);
 
