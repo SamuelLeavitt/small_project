@@ -13,8 +13,10 @@ $email = $inData['email'];
 $phone = $inData['phone_number'];
 
 
+// Uses the reusable function from Middleware.php
+$userId = getUserIdFromCookie();
+
 $stmt = $conn->prepare("INSERT INTO contacts (first_name, last_name, email, phone_number, user_id) VALUES (?,?,?,?,?)");
-// userId comes from the decoded JWT in Middleware.php
 $stmt->bind_param("ssssi", $name, $lastName, $email, $phone, $userId);
 
 if ($stmt->execute()) {
