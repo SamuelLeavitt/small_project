@@ -19,17 +19,25 @@ if ($conn->connect_error) {
 // Hash password
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-$stmt = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
+// Insert new user into the database
+$stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
 $stmt->bind_param("sss", $username, $email, $password_hash);
 
-// For inserts/updates/deletes, WE must check execute() to know if the DB accepted our change.
-// For selects(Login), we check the result rows to see if we found what we wanted.
-
 if ($stmt->execute()) {
-    sendResultInfoAsJson('{"success":true}');
-    // maybe make it say what is wrong instead of just error
+    // Get the ID of the newly created user
+    $userId = $stmt->insert_id;
+
+    // Set user_id cookie upon successful registration
+    setcookie("user_id", $userId, time() + (86400 * 30), "/", "", true, true); // Expires in 30 days, HTTPOnly
+
+    sendResultInfoAsJson(json_encode([
+        "success" => true,
+        "message" => "Registration successful"
+    ]));
 } else {
-    sendResultInfoAsJson('{"error":"Registration failed"}');
+    sendResultInfoAsJson(json_encode([
+        "error" => "Registration failed"
+    ]));
 }
 
 $stmt->close();
