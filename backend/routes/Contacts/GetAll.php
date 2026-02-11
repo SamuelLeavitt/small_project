@@ -2,15 +2,14 @@
 require_once '../../connection.php';
 require_once '../../Middleware/Middleware.php';
 
-
 $inData = json_decode(file_get_contents('php://input'), true);
 
-//$contactId = $inData['contact_id'];
+// Logged-in user's ID is read from the user_id cookie
+// using the helper in backend/Middleware/Middleware.php
+$userId = getUserIdFromCookie();
 
-// user_id comes from the decoded JWT in Middleware.php and ensures user fetches only their own contacts
 $stmt = $conn->prepare("SELECT id, first_name, last_name, email, phone_number FROM contacts WHERE user_id = ?");
-// userId comes from the decoded JWT in Middleware.php
-$stmt->bind_param("i",$userId);
+$stmt->bind_param("i", $userId);
 
 if($stmt->execute()){
     //get_result returns a result set from a prepared statement not really the data itself. 
