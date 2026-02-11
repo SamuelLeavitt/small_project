@@ -2,12 +2,14 @@
 require_once '../../connection.php';
 require_once '../../Middleware/Middleware.php';
 
-
 $inData = json_decode(file_get_contents('php://input'), true);
-$stmt = $conn->prepare("DELETE FROM contacts WHERE id=? AND user_id=?");
 $contactId = $inData['contact_id'];
 
-// userId comes from the decoded JWT in Middleware.php
+// Logged-in user's ID is taken from the user_id cookie
+// via the helper in backend/Middleware/Middleware.php
+$userId = getUserIdFromCookie();
+
+$stmt = $conn->prepare("DELETE FROM contacts WHERE id=? AND user_id=?");
 $stmt->bind_param("ii", $contactId, $userId);
 
 if ($stmt->execute()) {
