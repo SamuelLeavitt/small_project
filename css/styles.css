@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
-  background: white;
+  background: lightgray;
   color: black;
 }
 
@@ -15,18 +15,49 @@ header {
 
 header h1 {
   margin: 0 0 10px 0;
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .header-icon {
+  vertical-align: middle;
+  margin-right: 10px;
+  width: 60px;
+  height: 60px;
+}
+
+hr{
+  border: none;
+  border-top: 2px solid #000000;
+  margin-bottom: 20px;
 }
 
 button {
   padding: 6px 10px;
   margin-right: 6px;
   border: 1px solid #000000;
-  background: #eeeeee;
+  background: #03830e;
+  color: #ffffff;
   cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
 }
 
 button:hover {
-  background: #dddddd;
+  background: #f7eb48;
+  color: #000000;
+  font-weight: bold;
+  transform: translateY(-3px) scale(1.1);
+}
+
+button:active{
+  transform: scale(.9);
+  background: #990000;
+  color: #ffffff;
 }
 
 #searchInput {
@@ -36,16 +67,41 @@ button:hover {
   margin-bottom: 15px;
 }
 
-table {
+#contactsTable{
   border-collapse: collapse;
-  width: 100%;
+  margin: 25px 0;
+  min-width: 800px;
 }
 
-th, td {
-  border: 1px solid #000000;
-  padding: 8px;
-  text-align: left;
+/* Header Cells */
+#contactsTable th{
+  background-color: #03830e;
+  font-size: 1em;
+  text-align:center;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 12px 10px;
 }
+
+/* Body Cells */
+#contactsBody td{
+  font-size: 0.9;
+  background-color: #ffffff;
+  color: #ffffff;
+  text-align: left;
+  padding: 12px 10px;
+}
+
+/* Body Cells Rows*/
+#contactsBody tr{
+  border-bottom: 1px solid #dddddd;
+}
+
+/* Body Cells Rows - every other row is highlighted a different color*/
+#contactsBody tr:nth-of-type(even){
+  background-color: #f2f2f2;
+}
+
 
 #contactModal {
   position: fixed;
