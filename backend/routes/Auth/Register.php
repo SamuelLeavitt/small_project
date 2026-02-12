@@ -19,16 +19,19 @@ if ($conn->connect_error) {
 // Hash password
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-// Insert new user into the database
-$stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+// Insert new user into the database.
+// Column name is password_hash (see schema.sql).
+$stmt = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
 $stmt->bind_param("sss", $username, $email, $password_hash);
 
 if ($stmt->execute()) {
     // Get the ID of the newly created user
     $userId = $stmt->insert_id;
 
-    // Set user_id cookie upon successful registration
-    setcookie("user_id", $userId, time() + (86400 * 30), "/", "", true, true); // Expires in 30 days, HTTPOnly
+    // Set user_id cookie upon successful registration.
+    // For local http development, secure=false so the cookie is set.
+    // In production on https, change the second-to-last argument to true.
+    setcookie("user_id", $userId, time() + (86400 * 30), "/", "", false, true);
 
     sendResultInfoAsJson(json_encode([
         "success" => true,
