@@ -20,16 +20,18 @@ if ($conn->connect_error) {
 }
 
 
-// Verify user credentials
-$stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
+// Verify user credentials (password_hash column as defined in schema.sql)
+$stmt = $conn->prepare("SELECT id, password_hash FROM users WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($row = $result->fetch_assoc()) {
-    if (password_verify($password, $row['password'])) {
-        // Set user_id cookie upon successful login
-        setcookie("user_id", $row['id'], time() + (86400 * 30), "/", "", true, true); // Expires in 30 days, HTTPOnly
+    if (password_verify($password, $row['password_hash'])) {
+        // Set user_id cookie upon successful login.
+        // For local http development, secure=false so the cookie is set.
+        // In production on https, change the second-to-last argument to true.
+        setcookie("user_id", $row['id'], time() + (86400 * 30), "/", "", false, true);
         sendResultInfoAsJson(json_encode([
             "success" => true,
             "message" => "Login successful"
