@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Personal Contact Manager</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/register.js" defer></script>
+</head>
+<body class="register-page">
+  <header>
+    <h1>
+      <img src="images/user-square-icon.png" alt="User Icon" class="header-icon" />
+      Login
+    </h1>
+    <hr>
+  </header>
+
+  <div id="loginContainer">
+    <form id="loginForm">
+      <h2>Welcome</h2>
+
+      <input 
+        type="text" 
+        id="firstName" 
+        name="firstName" 
+        placeholder="First Name" 
+        required 
+        />
+
+      <input 
+        type="text" 
+        id="lastName" 
+        name="lastName" 
+        placeholder="Last Name" 
+        required 
+        />
+
+      <input 
+        type="text" 
+        id="username" 
+        name="username" 
+        placeholder="Username" 
+        required
+        pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}"
+        title="Must be between 3-13 characters and must contain at least one letter"
+        />
+
+      <input 
+        type="password" 
+        id="password" 
+        name="password" 
+        placeholder="password" 
+        required
+        pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[!"
+        />
+
+      <input 
+        type="passowrd" 
+        id="password" 
+        name="confirmPassword" 
+        placeholder="Confirm Password" 
+        required 
+      />
+
+
+
+      <button type="submit">Log In</button>
+
+      <p id="registerMessage" class="error-message"></p>
+
+      <p>
+        Already have an account?
+        <a href="login.html">Login</a>
+      </p>
+    </form>
+  </div>
+
+</body>
+</html>
