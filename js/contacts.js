@@ -198,3 +198,35 @@ if (logoutBtn) { //conditional placeholder for logout when login/auth is impleme
 if(loadContacts()){
   loadContacts();
 }
+
+// Allows the pop-up window to add contacts to be dragged around the screen by its header.
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modalWindow");
+  const header = document.getElementById("modalHeader");
+
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  // Start dragging when mouse is pressed on header
+  header.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - modal.offsetLeft;
+    offsetY = e.clientY - modal.offsetTop;
+    header.style.cursor = "grabbing";
+  });
+
+  // Dragging motion when mouse moves
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+
+    modal.style.left = e.clientX - offsetX + "px";
+    modal.style.top = e.clientY - offsetY + "px";
+  });
+
+  // Stop dragging when mouse is released
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+    header.style.cursor = "grab";
+  });
+});

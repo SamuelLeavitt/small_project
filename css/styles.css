@@ -85,7 +85,7 @@ button:active{
 
 /* Body Cells */
 #contactsBody td{
-  font-size: 0.9;
+  font-size: 0.9em;
   background-color: #ffffff;
   color: #ffffff;
   text-align: left;
@@ -102,30 +102,6 @@ button:active{
   background-color: #f2f2f2;
 }
 
-
-#contactModal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-#contactForm {
-  background: white;
-  border: 1px solid #000;
-  width: 320px;
-  padding: 12px;
-  margin: 80px auto;
-}
-
-#contactForm input {
-  width: 95%;
-  padding: 6px;
-  margin: 6px 0;
-  border: 1px solid #000;
-}
 
 body.login-page {
   display: flex;

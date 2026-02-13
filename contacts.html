@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal Contact Manager</title>
+
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/contact-form.css" />
+
   <script src="js/contacts.js" defer></script>
 </head>
+
 <body>
   <header>
     <h1>
@@ -18,7 +23,7 @@
     <button id="logoutBtn" type="button">Log Out</button>
   </header>
 
-  <input type="text" id="searchInput" placeholder="Search Contacts" />       
+  <input type="text" id="searchInput" placeholder="Search Contacts" />
   <button type="button" id="searchBtn">Search</button>
 
   <table id="contactsTable">
@@ -35,18 +40,25 @@
   </table>
 
   <div id="contactModal" class="hidden">
-    <form id="contactForm">
-      <h2 id="formTitle">Add Contact</h2>
+    <div class="modal-window" id="modalWindow">
+      <div class="modal-header" id="modalHeader">
+        <h2 id="formTitle">Add Contact</h2>
+      </div>
 
-      <input id="firstName" name="firstName" placeholder="First Name" required />
-      <input id="lastName" name="lastName" placeholder="Last Name" required />
-      <input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required />
-      <input id="email" name="email" placeholder="Email" type="email" required />
-      
-      <button type="submit">Save Contact</button>
-      <button type="button" id="cancelBtn">Cancel</button>
+      <form id="contactForm">
+        <input id="firstName" name="firstName" placeholder="First Name" required />
+        <input id="lastName" name="lastName" placeholder="Last Name" required />
+        <input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required />
+        <input id="email" name="email" placeholder="Email" type="email" required />
 
-    </form>
+        <div class="form-buttons">
+          <button type="submit">Save Contact</button>
+          <button type="button" id="cancelBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
+
 </body>
+
 </html>
