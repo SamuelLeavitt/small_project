@@ -20,18 +20,95 @@ const lastName = document.getElementById("lastName");
 const phoneNumber = document.getElementById("phoneNumber");
 const email = document.getElementById("email");
 
-//backend call functions - loadContacts, saveContact, deleteContact - pending implementation
+//backend call functions
 
 function loadContacts() {
+  const xhr = new XMLHttpRequest();
+  const url = `${urlBase}/GetAll.${extension}`;
 
+  xhr.open("POST", url, true);
+  xhr.withCredentials = true;
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== 4) return;
+
+    if (xhr.status !== 200) {
+      console.error("[GetAll] HTTP", xhr.status);
+      console.error(xhr.responseText);
+      return;
+    }
+
+    let json = null;
+    try {
+      json = JSON.parse(xhr.responseText);
+    } 
+    catch {
+      json = null;
+    }
+
+    let list = [];
+
+    if (Array.isArray(json)) 
+      list = json;
+    else if (json?.contacts) 
+      list = json.contacts;
+    else if (json?.results) 
+      list = json.results;
+
+    contacts = list;
+    renderContacts();
+  };
+
+  xhr.send(JSON.stringify({}));
 }
 
 function saveContact(payload) {
+  const xhr = new XMLHttpRequest();
+  const route = editingId !== null ? "Update" : "Create";
+  const url = `${urlBase}/${route}.${extension}`;
+  const body = Object.assign({}, payload);
 
+  if (editingId !== null) 
+    body.contact_id = editingId;
+
+  xhr.open("POST", url, true);
+  xhr.withCredentials = true;
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== 4) 
+      return;
+    if (xhr.status !== 200) {
+      console.error(`[${route}] HTTP`, xhr.status);
+      console.error(xhr.responseText);
+      return;
+    }
+    loadContacts();
+    closeModal();
+  };
+  xhr.send(JSON.stringify(body));
 }
 
 function deleteContact(id) {
+  if (!confirm("Delete this contact?")) 
+    return;
 
+  const xhr = new XMLHttpRequest();
+  const url = `${urlBase}/Delete.${extension}`;
+
+  xhr.open("POST", url, true);
+  xhr.withCredentials = true;
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== 4) 
+      return;
+    if (xhr.status !== 200) {
+      console.error("[Delete] HTTP", xhr.status);
+      console.error(xhr.responseText);
+      return;
+    }
+    loadContacts();
+  };
+  xhr.send(JSON.stringify({ contact_id: id }));
 }
 
 //contact form functions - open add, open edit, close modal, submit form (add or edit), search contacts
@@ -51,7 +128,8 @@ function openAdd() {
 //open edit function
 function openEdit(id) {
   const c = contacts.find((x) => String(x.id) === String(id));
-  if (!c) return;
+  if (!c) 
+    return;
   editingId = c.id;
 
   //fill inputs from contact object
@@ -61,7 +139,8 @@ function openEdit(id) {
   email.value = c.email ?? "";
 
   const title = document.getElementById("formTitle");
-  if (title) title.textContent = "Edit Contact";
+  if (title) 
+    title.textContent = "Edit Contact";
 
   modal.classList.remove("hidden");
 
@@ -74,16 +153,17 @@ function closeModal() {
   form.reset();
 
   const title = document.getElementById("formTitle");
-  if (title) title.textContent = "Add Contact";
+  if (title) 
+    title.textContent = "Add Contact";
 }
 
-//contact rendering function
-function renderContacts() {
+//contact rendering function - takes list of contacts to render, full list as default if called without argument
+function renderContacts(list = contacts) {
   //clear the table body
   contactsBody.innerHTML = "";
 
   //go through every contact
-  contacts.forEach(contact => {
+  list.forEach(contact => {
     const row = document.createElement("tr");
 
     row.innerHTML = `
@@ -118,9 +198,7 @@ function attachRowEvents() {
   document.querySelectorAll(".deleteBtn").forEach(btn => {
     btn.onclick = () => {
       const id = Number(btn.dataset.id);
-      //pending backend call implementation  - replace the following two lines with deleteContact(id), as current implementation is just for frontend testing
-      contacts = contacts.filter(c => c.id !== id);
-      renderContacts();
+      deleteContact(id);
     };
   });
 
@@ -141,10 +219,7 @@ form.onsubmit = (e) => {
     alert("Please fill out all fields.");
     return;
   }
-  if(saveContact(payload)){ // pending backend call implementation, remove from conditional once saveContact is working
-    saveContact(payload);
-  }
-  closeModal(); // close modal after saving contact for now, pending backend functionality (delete once saveContact working)
+  saveContact(payload);
 };
 
 //cancel button functionality
@@ -171,33 +246,17 @@ searchBtn.onclick = () => {
     (c.last_name ?? "").toLowerCase().includes(query)
   );
 
-  contactsBody.innerHTML = "";
-
-  filtered.forEach((c) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${c.first_name ?? ""}</td>
-      <td>${c.last_name ?? ""}</td>
-      <td>${c.phone_number ?? ""}</td>
-      <td>${c.email ?? ""}</td>
-      <td><button onclick="openEdit(${c.id})">Edit</button></td>
-      <td><button onclick="deleteContact(${c.id})">Delete</button></td>
-    `;
-    contactsBody.appendChild(row);
-  });
-
+  renderContacts(filtered);
 };
 
 if (logoutBtn) { //conditional placeholder for logout when login/auth is implemented
   logoutBtn.onclick = () => {
-    // clear user data and redirect to login page (index.html) - in progress
+    // clear user data and redirect to home page - in progress
   };
 }
 
-//init function - load contacts waiting on backend call implementation, for now just renders empty table, remove if statement once loadContacts is working
-if(loadContacts()){
-  loadContacts();
-}
+//initial load of contacts for user when page opens
+loadContacts();
 
 // Allows the pop-up window to add contacts to be dragged around the screen by its header.
 document.addEventListener("DOMContentLoaded", () => {
