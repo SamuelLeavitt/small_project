@@ -116,10 +116,37 @@ body.login-page {
 }
 
 #loginForm {
-  width: 320px;
+  width: 360px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
+
+  /* Glass Effect */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+#loginForm input{
+  width: 340px;
+  height: 50px;
+  align-self: center;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #000000;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+#loginForm button{
+  width: 340px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 8px;
+  align-self: center;
 }
 
 body.HomePage {
@@ -129,4 +156,19 @@ body.HomePage {
   height: 100vh;
   margin: 0;
   text-align: center;
+}
+
+#loginForm p:last-of-type{
+  text-align: center;
+}
+
+#loginForm h2{
+  transform: translateX(10px);
+}
+
+.body-pattern{
+  background-image:
+    repeating-conic-gradient(#D0D4CA 0deg 90deg, #A7D397 90deg 180deg);
+  background-size: 400px 400px;
+  z-index: -1;
 }
