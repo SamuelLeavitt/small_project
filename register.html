@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Personal Contact Manager</title>
+  <title>Register - Personal Contact Manager</title>
   <link rel="stylesheet" href="css/styles.css" />
   <script src="js/register.js" defer></script>
 </head>
@@ -22,28 +22,20 @@
 
       <input 
         type="text" 
-        id="firstName" 
-        name="firstName" 
-        placeholder="First Name" 
-        required 
-        />
-
-      <input 
-        type="text" 
-        id="lastName" 
-        name="lastName" 
-        placeholder="Last Name" 
-        required 
-        />
-
-      <input 
-        type="text" 
         id="username" 
         name="username" 
         placeholder="Username" 
         required
         pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}"
-        title="Must be between 3-13 characters and must contain at least one letter"
+        title="Must be between 3-18 characters and must contain at least one letter"
+        />
+
+      <input 
+        type="email" 
+        id="email" 
+        name="email" 
+        placeholder="Email" 
+        required 
         />
 
       <input 
@@ -52,12 +44,13 @@
         name="password" 
         placeholder="Password" 
         required
-        pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[!"
+        pattern="(?=.*\d)(?=.*[A-Za-z]).{8,}"
+        title="Must be at least 8 characters and contain at least one letter and one number"
         />
 
       <input 
-        type="passowrd" 
-        id="password" 
+        type="password" 
+        id="confirmPassword" 
         name="confirmPassword" 
         placeholder="Confirm Password" 
         required 
