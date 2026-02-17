@@ -111,6 +111,27 @@ function deleteContact(id) {
   xhr.send(JSON.stringify({ contact_id: id }));
 }
 
+function doLogout(){
+  const xhr = new XMLHttpRequest();
+  const url = "backend/routes/Auth/Logout.php";
+
+  xhr.open("POST", url, true);
+  xhr.withCredentials = true;
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== 4) 
+      return;
+    if (xhr.status !== 200) {
+      console.error("[Logout] HTTP", xhr.status);
+      console.error(xhr.responseText);
+      return;
+    }
+    //redirects user to home page / login page after logging out successfully
+    window.location.href = "index.html";
+  };
+  xhr.send(JSON.stringify({}));
+}
+
 //contact form functions - open add, open edit, close modal, submit form (add or edit), search contacts
 
 //open add function
@@ -249,11 +270,10 @@ searchBtn.onclick = () => {
   renderContacts(filtered);
 };
 
-if (logoutBtn) { //conditional placeholder for logout when login/auth is implemented
-  logoutBtn.onclick = () => {
-    // clear user data and redirect to home page - in progress
-  };
-}
+//logout button functionality
+logoutBtn.onclick = () => {
+  doLogout();
+};
 
 //initial load of contacts for user when page opens
 loadContacts();
