@@ -21,7 +21,7 @@ body {
 	width: 40%;
 	min-width: 400px;
 
-	background-color: #ffffff9d;
+	background-color: #ffffffce;
 	border-radius: 10px;
 	height: 100px;
 
@@ -63,7 +63,6 @@ header .header-icon {
 
 button {
 	padding: 6px 10px;
-	margin-right: 6px;
 	border: 1px solid #000000;
 	background: #03830e;
 	color: #ffffff;
@@ -72,14 +71,12 @@ button {
 	font-weight: bold;
 }
 
-
 button:hover {
 	background: #f7eb48;
 	color: #000000;
 	font-weight: bold;
-	transform: translateY(-3px) scale(1.1);
+	transform: translateY(-2px) scale(1.05);
 }
-
 
 button:active {
 	transform: scale(.9);
@@ -87,18 +84,50 @@ button:active {
 	color: #ffffff;
 }
 
+.contacts-container button{
+	margin-right: 6px;
+}
+
+.formButton:hover{
+	transform: translateY(-3px) scale(1.05);
+}
+
+.formButton:active{
+	transform: translateY(-3px) scale(0.95);
+}
+
+#searchMode{
+	background-color: #03830e;
+	color: #ffffff;
+	font-weight: bold;
+	text-align: center;
+	padding: 6px 10px;
+	border: 1px solid #000000;
+	border-radius: 6px;
+	margin-right: 6px;
+}
+
+#formInput button {
+	width: 340px;
+	height: 50px;
+	font-size: 20px;
+	border-radius: 8px;
+	align-self: center;
+}
 
 #searchInput {
 	padding: 6px;
 	border: 1px solid #000000;
-	width: 250px;
+	width: 300px;
 	margin-bottom: 10px;
+	margin-right: 6px;
+	border-radius: 6px;
 }
 
 
 #contactsTable {
 	border-collapse: collapse;
-	margin: 25px 0;
+	margin: 25px 0 25px 20px;
 	min-width: 800px;
 }
 
@@ -162,14 +191,14 @@ body.contacts{
 }
 
 
-#loginContainer {
+#formContainer {
 	display: flex;
 	justify-content: center;
 	margin-top: 80px;
 }
 
 
-#loginForm {
+#formInput {
 	width: 360px;
 	display: flex;
 	flex-direction: column;
@@ -185,7 +214,7 @@ body.contacts{
 }
 
 
-#loginForm input {
+#formInput input {
 	width: 340px;
 	height: 50px;
 	align-self: center;
@@ -197,15 +226,6 @@ body.contacts{
 }
 
 
-#loginForm button {
-	width: 340px;
-	height: 50px;
-	font-size: 20px;
-	border-radius: 8px;
-	align-self: center;
-}
-
-
 body.HomePage {
 	display: flex;
 	flex-direction: column;
@@ -214,13 +234,14 @@ body.HomePage {
 }
 
 
-#loginForm p:last-of-type {
+#formInput p:last-of-type {
 	text-align: center;
 }
 
 
-#loginForm h2 {
-	transform: translateX(10px);
+#formInput h2 {
+	text-align: center;
+	width: 100%;
 }
 
 
@@ -238,3 +259,4 @@ body.HomePage {
   margin-top: 10px;
   text-align: center;
 }
+

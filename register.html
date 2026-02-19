@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="css/styles.css" />
 	<script src="js/register.js" defer></script>
 </head>
-<!-- changed class so the title was centered -->
+
 
 <body class="register body-pattern">
 
@@ -20,11 +20,13 @@
 		<hr>
 	</header>
 
+	<!-- Registration Form Container -->
+	<div id="formContainer">
 
-	<div id="loginContainer">
-		<form id="loginForm">
+		<form id="formInput">
+
 			<h2>Welcome</h2>
-
+			
 			<input type="text" id="username" name="username" placeholder="Username" required
 				pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}"
 				title="Must be between 3-18 characters and must contain at least one letter" />
@@ -39,7 +41,7 @@
 				required />
 
 
-			<button type="submit">Register</button>
+			<button type="submit" class="formButton">Register</button>
 
 			<p id="registerMessage" class="error-message"></p>
 
@@ -49,8 +51,8 @@
 			</p>
 			
 		</form>
+
 	</div>
 
 </body>
-
 </html>
