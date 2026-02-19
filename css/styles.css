@@ -1,3 +1,9 @@
+html, body {
+	height: 100%;
+	min-height: 100vh;
+	margin: 0;
+}
+
 body {
 	font-family: Arial, sans-serif;
 	background: lightgray;
