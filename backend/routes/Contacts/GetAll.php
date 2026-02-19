@@ -8,7 +8,7 @@ $inData = json_decode(file_get_contents('php://input'), true);
 // using the helper in backend/Middleware/Middleware.php
 $userId = getUserIdFromCookie();
 
-$stmt = $conn->prepare("SELECT id, first_name, last_name, email, phone_number FROM contacts WHERE user_id = ?");
+$stmt = $conn->prepare("SELECT id, first_name, last_name, email, phone_number, creation_date FROM contacts WHERE user_id = ?");
 $stmt->bind_param("i", $userId);
 
 if($stmt->execute()){
