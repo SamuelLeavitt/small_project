@@ -212,6 +212,11 @@ body.contacts{
 	max-width: 1000px;
 }
 
+.formButton{
+	position:relative;
+	width: 100px;
+    margin: 0 auto; /* Centers the button horizontally */
+}
 
 #formContainer {
 	display: flex;
