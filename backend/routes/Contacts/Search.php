@@ -10,42 +10,45 @@ $userId = getUserIdFromCookie();
 // search term from input
 $search = isset($inData['search']) ? $inData['search'] : '';
 
-// SQL query to handle empty search terms
-if ($search === '') {
-    $sql = "SELECT id, first_name, last_name, email, phone_number FROM contacts WHERE user_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
-} else {
-    $sql = "SELECT id, first_name, last_name, email, phone_number FROM contacts WHERE user_id = ? AND (first_name LIKE ? OR last_name LIKE ?)";
-    $stmt = $conn->prepare($sql);
-    $likeSearch = "%$search%";
-    $stmt->bind_param("iss", $userId, $likeSearch, $likeSearch);
-}
 
-// SQL query to handle separate first_name and last_name inputs
 $firstName = isset($inData['first_name']) ? $inData['first_name'] : '';
 $lastName = isset($inData['last_name']) ? $inData['last_name'] : '';
 
-if ($firstName === '' && $lastName === '') {
-    $sql = "SELECT id, first_name, last_name, email, phone_number FROM contacts WHERE user_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
-} else if ($firstName !== '' && $lastName === '') {
-    $sql = "SELECT id, first_name, last_name, email, phone_number FROM contacts WHERE user_id = ? AND first_name LIKE ?";
-    $stmt = $conn->prepare($sql);
-    $likeFirstName = "%$firstName%";
-    $stmt->bind_param("is", $userId, $likeFirstName);
-} else if ($firstName === '' && $lastName !== '') {
-    $sql = "SELECT id, first_name, last_name, email, phone_number FROM contacts WHERE user_id = ? AND last_name LIKE ?";
-    $stmt = $conn->prepare($sql);
-    $likeLastName = "%$lastName%";
-    $stmt->bind_param("is", $userId, $likeLastName);
-} else {
-    $sql = "SELECT id, first_name, last_name, email, phone_number FROM contacts WHERE user_id = ? AND first_name LIKE ? AND last_name LIKE ?";
-    $stmt = $conn->prepare($sql);
-    $likeFirstName = "%$firstName%";
-    $likeLastName = "%$lastName%";
-    $stmt->bind_param("iss", $userId, $likeFirstName, $likeLastName);
+if ($firstName !== '' || $lastName !== ''){
+    // SQL query to handle separate first_name and last_name inputs
+    if ($firstName !== '' && $lastName === '') {
+        $sql = "SELECT id, first_name, last_name, email, phone_number, creation_date FROM contacts WHERE user_id = ? AND first_name LIKE ?";
+        $stmt = $conn->prepare($sql);
+        $likeFirstName = "%$firstName%";
+        $stmt->bind_param("is", $userId, $likeFirstName);
+    } 
+    else if ($firstName === '' && $lastName !== '') {
+        $sql = "SELECT id, first_name, last_name, email, phone_number, creation_date FROM contacts WHERE user_id = ? AND last_name LIKE ?";
+        $stmt = $conn->prepare($sql);
+        $likeLastName = "%$lastName%";
+        $stmt->bind_param("is", $userId, $likeLastName);
+    } 
+    else {
+        $sql = "SELECT id, first_name, last_name, email, phone_number, creation_date FROM contacts WHERE user_id = ? AND first_name LIKE ? AND last_name LIKE ?";
+        $stmt = $conn->prepare($sql);
+        $likeFirstName = "%$firstName%";
+        $likeLastName = "%$lastName%";
+        $stmt->bind_param("iss", $userId, $likeFirstName, $likeLastName);
+    }
+} 
+else {
+    // SQL query to handle empty search terms
+    if ($search === '') {
+        $sql = "SELECT id, first_name, last_name, email, phone_number, creation_date FROM contacts WHERE user_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $userId);
+    } 
+    else {
+        $sql = "SELECT id, first_name, last_name, email, phone_number, creation_date FROM contacts WHERE user_id = ? AND (first_name LIKE ? OR last_name LIKE ?)";
+        $stmt = $conn->prepare($sql);
+        $likeSearch = "%$search%";
+        $stmt->bind_param("iss", $userId, $likeSearch, $likeSearch);
+    }
 }
 
 if($stmt->execute()){
