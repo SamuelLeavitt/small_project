@@ -19,6 +19,23 @@ if ($conn->connect_error) {
 // Hash password
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
+// Check if the username or email already exists in the database
+$checkStmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
+$checkStmt->bind_param("ss", $username, $email);
+$checkStmt->execute();
+$checkResult = $checkStmt->get_result();
+
+if ($checkResult->num_rows > 0) {
+    sendResultInfoAsJson(json_encode([
+        "error" => "Username or email already exists. Please choose a different username or email."
+    ]));
+    $checkStmt->close();
+    $conn->close();
+    exit();
+}
+
+$checkStmt->close();
+
 // Insert new user into the database.
 // Column name is password_hash (see schema.sql).
 $stmt = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");

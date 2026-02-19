@@ -5,6 +5,7 @@ html, body {
 }
 
 body {
+	position:relative;
 	font-family: Arial, sans-serif;
 	background: lightgray;
 	color: black;
@@ -13,6 +14,29 @@ body {
 
 .hidden {
 	display: none;
+}
+
+
+.fah {
+    position: fixed; /* allowed me to move it freely */
+    top: 20px;
+    right: 0; 
+    margin-right: 10px; 
+
+    background-color: #ff4d4d; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds shadow */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.fah:hover {
+    background-color: #ff6666; 
 }
 
 
@@ -64,64 +88,52 @@ header .header-icon {
 button {
 	padding: 6px 10px;
 	border: 1px solid #000000;
+	font-size:17px;
 	background: #03830e;
 	color: #ffffff;
 	cursor: pointer;
 	border-radius: 6px;
 	font-weight: bold;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds shadow */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
 
 button:hover {
-	background: #f7eb48;
-	color: #000000;
+	background: #026b0b; /* Darker green */
+	color: #ffffff; /* lets keep text white for better readability */
 	font-weight: bold;
 	transform: translateY(-2px) scale(1.05);
 }
 
 button:active {
 	transform: scale(.9);
-	background: #990000;
+	background: #004d07; /* Even darker green for active state */
 	color: #ffffff;
 }
 
-.contacts-container button{
-	margin-right: 6px;
-}
 
-.formButton:hover{
-	transform: translateY(-3px) scale(1.05);
-}
-
-.formButton:active{
-	transform: translateY(-3px) scale(0.95);
-}
-
-#searchMode{
-	background-color: #03830e;
-	color: #ffffff;
-	font-weight: bold;
-	text-align: center;
-	padding: 6px 10px;
-	border: 1px solid #000000;
-	border-radius: 6px;
-	margin-right: 6px;
-}
-
-.form-styling button {
-	width: 340px;
-	height: 50px;
-	font-size: 20px;
-	border-radius: 8px;
-	align-self: center;
-}
-
+/* Updated styles for the search input and dropdown */
 #searchInput {
-	padding: 6px;
-	border: 1px solid #000000;
-	width: 300px;
-	margin-bottom: 10px;
-	margin-right: 6px;
-	border-radius: 6px;
+    padding: 8px;
+    border: 2px solid #03830e; /* Matches button color */
+    border-radius: 6px;
+    width: 300px; /* Slightly wider for better usability */
+    font-size: 16px;
+}
+
+#searchMode {
+    margin: 0 12px;
+    padding: 8px 12px;
+    border: 2px solid #03830e; /* Matches button color */
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #f2f2f2; /* Light background for better contrast */
+    color: #000000;
+    cursor: pointer;
+}
+
+#searchMode:hover {
+    background-color: #e6e6e6; /* Slightly darker on hover */
 }
 
 
@@ -129,6 +141,9 @@ button:active {
 	border-collapse: collapse;
 	margin: 25px 0 25px 20px;
 	min-width: 800px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* more shadows! */
+	border-radius: 8px; /* Rounded corners */
+	overflow: hidden; /* Ensure rounded corners apply to content */
 }
 
 
@@ -150,16 +165,20 @@ button:active {
 	color: #000000;
 	text-align: left;
 	padding: 12px 10px;
+	transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
 
 /* Body Cells Rows*/
 #contactsBody tr {
 	border-bottom: 1px solid #dddddd;
+	transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
+#contactsBody tr:hover {
+	background-color: #e8f5e9; /* Light green hover effect */
+}
 
-/* Body Cells Rows - every other row is highlighted a different color*/
 #contactsBody tr:nth-of-type(even) {
 	background-color: #f2f2f2;
 }
@@ -185,9 +204,12 @@ body.contacts{
 }
 
 .contacts-container{
-	width: 80%;
+	position: relative;
+	left: 50%; 
+	/* centers the edge of this block */
+	transform: translateX(-50%); 
+	/* centers the block to be actually centered */
 	max-width: 1000px;
-	margin-left: 20px;
 }
 
 
@@ -244,10 +266,21 @@ body.HomePage {
 }
 
 
+#formInput p:last-of-type {
+	text-align: center;
+}
 
+
+#formInput h2 {
+	text-align: center;
+	width: 100%;
+}
+
+
+/* decreased the background-size and changed color*/
 .body-pattern {
-	background-image: repeating-conic-gradient(#D0D4CA 0deg 90deg, #A7D397 90deg 180deg);
-	background-size: 400px 400px;
+	background-image: repeating-conic-gradient(#d8e8c1 0deg 90deg, #A7D397 90deg 180deg);
+	background-size: 200px 200px;
 	z-index: -1;
 }
 
