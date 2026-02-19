@@ -1,7 +1,7 @@
 const authUrlBase = "backend/routes/Auth";
 const authExtension = "php";
 
-const registerForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
 const regUsername = document.getElementById("username");
 const regEmail = document.getElementById("email");
 const regPassword = document.getElementById("password");
