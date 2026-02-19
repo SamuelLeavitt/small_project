@@ -328,8 +328,21 @@ searchBtn.onclick = () => {
     searchContacts({ last_name: value });
   } 
   else {
-    searchContacts({ search: value });
-  }
+      //split search into parts
+      const normalized = value.replace(/\s+/g, " ");
+      const parts = normalized.split(" ");
+
+      // search first part as first name and remaining as last name
+      if (parts.length >= 2) {
+        const first = parts[0];
+        const last  = parts.slice(1).join(" ");
+        searchContacts({ first_name: first, last_name: last });
+      } 
+      //for one part, searches both first and last name for value 
+      else {
+        searchContacts({ search: normalized });
+      }
+    }
 };
 
 //search by enter key
