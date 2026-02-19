@@ -29,9 +29,15 @@
 		<button id="addContactBtn" type="button">Add Contact</button>
 		<button id="logoutBtn" type="button">Log Out</button>
 
-		<input type="text" id="searchInput" placeholder="Search Contacts" />
-		<button type="button" id="searchBtn">Search</button>
+<input id="searchInput" type="text" placeholder="Search By..." />
 
+<select id="searchMode" style="margin: 0 12px; padding: 6px 10px;">
+  <option value="general">Full Name</option>
+  <option value="first">First Name</option>
+  <option value="last">Last Name</option>
+</select>
+
+<button id="searchBtn">Search</button>
 
 		<table id="contactsTable">
 			<thead>
@@ -40,13 +46,12 @@
 					<th>Last Name</th>
 					<th>Phone</th>
 					<th>Email</th>
+					<th>Date Created</th>          
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody id="contactsBody"></tbody>
 		</table>
-
-
 		<div id="contactModal" class="hidden">
 			<div class="modal-window" id="modalWindow">
 				<div class="modal-header" id="modalHeader">
