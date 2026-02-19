@@ -45,7 +45,7 @@ body {
 	width: 40%;
 	min-width: 400px;
 
-	background-color: #ffffff9d;
+	background-color: #ffffffce;
 	border-radius: 10px;
 	height: 100px;
 
@@ -87,7 +87,6 @@ header .header-icon {
 
 button {
 	padding: 6px 10px;
-	margin-right: 6px;
 	border: 1px solid #000000;
 	font-size:17px;
 	background: #03830e;
@@ -103,7 +102,7 @@ button:hover {
 	background: #026b0b; /* Darker green */
 	color: #ffffff; /* lets keep text white for better readability */
 	font-weight: bold;
-	transform: translateY(-3px) scale(1.1);
+	transform: translateY(-2px) scale(1.05);
 }
 
 button:active {
@@ -140,7 +139,7 @@ button:active {
 
 #contactsTable {
 	border-collapse: collapse;
-	margin: 25px 0;
+	margin: 25px 0 25px 20px;
 	min-width: 800px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* more shadows! */
 	border-radius: 8px; /* Rounded corners */
@@ -214,14 +213,14 @@ body.contacts{
 }
 
 
-#loginContainer {
+#formContainer {
 	display: flex;
 	justify-content: center;
 	margin-top: 80px;
 }
 
 
-#loginForm {
+#formInput {
 	width: 360px;
 	display: flex;
 	flex-direction: column;
@@ -237,7 +236,7 @@ body.contacts{
 }
 
 
-#loginForm input {
+#formInput input {
 	width: 340px;
 	height: 50px;
 	align-self: center;
@@ -249,15 +248,6 @@ body.contacts{
 }
 
 
-#loginForm button {
-	width: 340px;
-	height: 50px;
-	font-size: 20px;
-	border-radius: 8px;
-	align-self: center;
-}
-
-
 body.HomePage {
 	display: flex;
 	flex-direction: column;
@@ -266,13 +256,14 @@ body.HomePage {
 }
 
 
-#loginForm p:last-of-type {
+#formInput p:last-of-type {
 	text-align: center;
 }
 
 
-#loginForm h2 {
-	transform: translateX(10px);
+#formInput h2 {
+	text-align: center;
+	width: 100%;
 }
 
 
@@ -291,3 +282,4 @@ body.HomePage {
   margin-top: 10px;
   text-align: center;
 }
+
