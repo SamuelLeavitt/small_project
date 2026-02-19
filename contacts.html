@@ -2,62 +2,72 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Contact Manager</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Personal Contact Manager</title>
 
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/contact-form.css" />
+	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/contact-form.css" />
 
-  <script src="js/contacts.js" defer></script>
+	<script src="js/contacts.js" defer></script>
 </head>
 
-<body class="body-pattern">
-  <header>
-    <h1>
-      <img src="images/user-square-icon.png" alt="Contact Icon" class="header-icon" />
-      Contact Records
-    </h1>
-    <hr>
-    <button id="addContactBtn" type="button">Add Contact</button>
-    <button id="logoutBtn" type="button">Log Out</button>
-  </header>
 
-  <input type="text" id="searchInput" placeholder="Search Contacts" />
-  <button type="button" id="searchBtn">Search</button>
+<body class="contacts body-pattern">
 
-  <table id="contactsTable">
-    <thead>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="contactsBody"></tbody>
-  </table>
 
-  <div id="contactModal" class="hidden">
-    <div class="modal-window" id="modalWindow">
-      <div class="modal-header" id="modalHeader">
-        <h2 id="formTitle">Add Contact</h2>
-      </div>
+	<header class="page-header">
+		<h1>
+			<img src="images/user-square-icon.png" alt="Contact Icon" class="header-icon" />
+			Contact Records
+		</h1>
+		<hr>
+	</header>
 
-      <form id="contactForm">
-        <input id="firstName" name="firstName" placeholder="First Name" required />
-        <input id="lastName" name="lastName" placeholder="Last Name" required />
-        <input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required />
-        <input id="email" name="email" placeholder="Email" type="email" required />
 
-        <div class="form-buttons">
-          <button type="submit">Save Contact</button>
-          <button type="button" id="cancelBtn">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
+	<div class="contacts-container">
+		<button id="addContactBtn" type="button">Add Contact</button>
+		<button id="logoutBtn" type="button">Log Out</button>
+
+		<input type="text" id="searchInput" placeholder="Search Contacts" />
+		<button type="button" id="searchBtn">Search</button>
+
+
+		<table id="contactsTable">
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody id="contactsBody"></tbody>
+		</table>
+
+
+		<div id="contactModal" class="hidden">
+			<div class="modal-window" id="modalWindow">
+				<div class="modal-header" id="modalHeader">
+					<h2 id="formTitle">Add Contact</h2>
+				</div>
+
+				<form id="contactForm">
+					<input id="firstName" name="firstName" placeholder="First Name" required />
+					<input id="lastName" name="lastName" placeholder="Last Name" required />
+					<input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required />
+					<input id="email" name="email" placeholder="Email" type="email" required />
+
+					<div class="form-buttons">
+						<button type="submit">Save Contact</button>
+						<button type="button" id="cancelBtn">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 
 </body>
 

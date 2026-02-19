@@ -1,54 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Personal Contact Manager</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <script src="js/login.js" defer></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login - Personal Contact Manager</title>
+	<link rel="stylesheet" href="css/styles.css" />
+	<script src="js/login.js" defer></script>
 </head>
+
+
 <body class="login-page body-pattern">
 
-  <section class="patternBackground"></section>
+	<header class="page-header">
+		<h1>
+			<img src="images/user-square-icon.png" alt="User Icon" class="header-icon" />
+			Login
+		</h1>
+		<hr>
+	</header>
 
-  <header>
-    <h1>
-      <img src="images/user-square-icon.png" alt="User Icon" class="header-icon" />
-      Login
-    </h1>
-    <hr>
-  </header>
 
-  <div id="loginContainer">
-    <form id="loginForm">
-      <h2>Welcome Back</h2>
+	<div id="loginContainer">
+		<form id="loginForm">
+			<h2>Welcome Back</h2>
 
-      <input 
-        type="text" 
-        id="username" 
-        name="username" 
-        placeholder="Username" 
-        required 
-      />
+			<input type="text" id="username" name="username" placeholder="Username" required />
 
-      <input 
-        type="password" 
-        id="password" 
-        name="password" 
-        placeholder="Password" 
-        required 
-      />
+			<input type="password" id="password" name="password" placeholder="Password" required />
 
-      <button type="submit">Log In</button>
+			<button type="submit">Log In</button>
 
-      <p id="loginMessage" class="error-message"></p>
+			<p id="loginMessage" class="error-message"></p>
 
-      <p>
-        Don't have an account? 
-        <a href="register.html">Register</a>
-      </p>
-    </form>
-  </div>
+			<p>
+				Don't have an account?
+				<a href="register.html">Register</a>
+			</p>
+		</form>
+	</div>
+
 
 </body>
+
 </html>

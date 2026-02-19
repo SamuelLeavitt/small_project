@@ -1,174 +1,225 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background: lightgray;
-  color: black;
+	font-family: Arial, sans-serif;
+	background: lightgray;
+	color: black;
 }
+
 
 .hidden {
-  display: none;
+	display: none;
 }
 
-header {
-  margin-bottom: 15px;
+
+.page-header {
+	margin: 20px auto;
+	width: 40%;
+	min-width: 400px;
+
+	background-color: #ffffff9d;
+	border-radius: 10px;
+	height: 100px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap:5px;
 }
+
 
 header h1 {
-  margin: 0 0 10px 0;
-  font-weight: bold;
-  font-size: 40px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+	margin:0;
+	font-weight: bold;
+	font-size: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
 }
+
 
 header .header-icon {
-  vertical-align: middle;
-  margin-right: 10px;
-  width: 60px;
-  height: 60px;
+	vertical-align: middle;
+	margin-right: 30px;
+	width: 60px;
+	height: 60px;
 }
 
-hr{
-  border: none;
-  border-top: 2px solid #000000;
-  margin-bottom: 20px;
+
+.page-header hr {
+	border: none;
+	border-top: 2px solid #000000;
+	width: 90%;
+	margin-right: 0 auto;
+	margin-top: 1px;
 }
+
 
 button {
-  padding: 6px 10px;
-  margin-right: 6px;
-  border: 1px solid #000000;
-  background: #03830e;
-  color: #ffffff;
-  cursor: pointer;
-  border-radius: 6px;
-  font-weight: bold;
+	padding: 6px 10px;
+	margin-right: 6px;
+	border: 1px solid #000000;
+	background: #03830e;
+	color: #ffffff;
+	cursor: pointer;
+	border-radius: 6px;
+	font-weight: bold;
 }
+
 
 button:hover {
-  background: #f7eb48;
-  color: #000000;
-  font-weight: bold;
-  transform: translateY(-3px) scale(1.1);
+	background: #f7eb48;
+	color: #000000;
+	font-weight: bold;
+	transform: translateY(-3px) scale(1.1);
 }
 
-button:active{
-  transform: scale(.9);
-  background: #990000;
-  color: #ffffff;
+
+button:active {
+	transform: scale(.9);
+	background: #990000;
+	color: #ffffff;
 }
+
 
 #searchInput {
-  padding: 6px;
-  border: 1px solid #000000;
-  width: 250px;
-  margin-bottom: 15px;
+	padding: 6px;
+	border: 1px solid #000000;
+	width: 250px;
+	margin-bottom: 10px;
 }
 
-#contactsTable{
-  border-collapse: collapse;
-  margin: 25px 0;
-  min-width: 800px;
+
+#contactsTable {
+	border-collapse: collapse;
+	margin: 25px 0;
+	min-width: 800px;
 }
+
 
 /* Header Cells */
-#contactsTable th{
-  background-color: #03830e;
-  font-size: 1em;
-  text-align:center;
-  font-weight: bold;
-  color: #ffffff;
-  padding: 12px 10px;
+#contactsTable th {
+	background-color: #03830e;
+	font-size: 1em;
+	text-align: center;
+	font-weight: bold;
+	color: #ffffff;
+	padding: 12px 10px;
 }
+
 
 /* Body Cells */
-#contactsBody td{
-  font-size: 0.9em;
-  background-color: #ffffff;
-  color: #000000;
-  text-align: left;
-  padding: 12px 10px;
+#contactsBody td {
+	font-size: 0.9em;
+	background-color: #ffffff;
+	color: #000000;
+	text-align: left;
+	padding: 12px 10px;
 }
+
 
 /* Body Cells Rows*/
-#contactsBody tr{
-  border-bottom: 1px solid #dddddd;
+#contactsBody tr {
+	border-bottom: 1px solid #dddddd;
 }
 
+
 /* Body Cells Rows - every other row is highlighted a different color*/
-#contactsBody tr:nth-of-type(even){
-  background-color: #f2f2f2;
+#contactsBody tr:nth-of-type(even) {
+	background-color: #f2f2f2;
+}
+
+
+body.register {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 
 body.login-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
+
+body.contacts{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.contacts-container{
+	width: 80%;
+	max-width: 1000px;
+	margin-left: 20px;
+}
+
 
 #loginContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 80px;
+	display: flex;
+	justify-content: center;
+	margin-top: 80px;
 }
+
 
 #loginForm {
-  width: 360px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+	width: 360px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 
-  /* Glass Effect */
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+	/* Glass Effect */
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(10px);
+
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 15px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-#loginForm input{
-  width: 340px;
-  height: 50px;
-  align-self: center;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #000000;
-  border-radius: 6px;
-  box-sizing: border-box;
+
+#loginForm input {
+	width: 340px;
+	height: 50px;
+	align-self: center;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #000000;
+	border-radius: 6px;
+	box-sizing: border-box;
 }
 
-#loginForm button{
-  width: 340px;
-  height: 50px;
-  font-size: 20px;
-  border-radius: 8px;
-  align-self: center;
+
+#loginForm button {
+	width: 340px;
+	height: 50px;
+	font-size: 20px;
+	border-radius: 8px;
+	align-self: center;
 }
+
 
 body.HomePage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
 
-#loginForm p:last-of-type{
-  text-align: center;
+
+#loginForm p:last-of-type {
+	text-align: center;
 }
 
-#loginForm h2{
-  transform: translateX(10px);
+
+#loginForm h2 {
+	transform: translateX(10px);
 }
 
-.body-pattern{
-  background-image:
-    repeating-conic-gradient(#D0D4CA 0deg 90deg, #A7D397 90deg 180deg);
-  background-size: 400px 400px;
-  z-index: -1;
+
+.body-pattern {
+	background-image: repeating-conic-gradient(#D0D4CA 0deg 90deg, #A7D397 90deg 180deg);
+	background-size: 400px 400px;
+	z-index: -1;
 }
