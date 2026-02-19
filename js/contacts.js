@@ -15,6 +15,7 @@ const searchBtn = document.getElementById("searchBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
 const searchInput = document.getElementById("searchInput");
+const searchMode  = document.getElementById("searchMode");
 const firstName = document.getElementById("firstName");
 const lastName = document.getElementById("lastName");
 const phoneNumber = document.getElementById("phoneNumber");
@@ -37,7 +38,7 @@ function loadContacts() {
       console.error(xhr.responseText);
       return;
     }
-
+    
     let json = null;
     try {
       json = JSON.parse(xhr.responseText);
@@ -111,6 +112,48 @@ function deleteContact(id) {
   xhr.send(JSON.stringify({ contact_id: id }));
 }
 
+function searchContacts({ search = "", first_name = "", last_name = "" } = {}) {
+  const xhr = new XMLHttpRequest();
+  const url = `${urlBase}/Search.${extension}`;
+
+  search = (search ?? "").trim();
+  first_name = (first_name ?? "").trim();
+  last_name = (last_name ?? "").trim();
+
+  const payload = (first_name !== "" || last_name !== "") ? { first_name, last_name } : { search };
+
+  xhr.open("POST", url, true);
+  xhr.withCredentials = true;
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== 4) return;
+
+    if (xhr.status !== 200) {
+      console.error("[Search] HTTP", xhr.status);
+      console.error(xhr.responseText);
+      return;
+    }
+
+    let json;
+    try {
+      json = JSON.parse(xhr.responseText);
+    } 
+    catch (e) {
+      console.error("[Search] Invalid JSON:", xhr.responseText);
+      return;
+    }
+
+    const list = Array.isArray(json) ? json : (json?.contacts ?? json?.results ?? []);
+
+    contacts = list;
+    renderContacts(contacts);
+  };
+
+  xhr.send(JSON.stringify(payload));
+}
+
+
 function doLogout(){
   const xhr = new XMLHttpRequest();
   const url = "backend/routes/Auth/Logout.php";
@@ -183,15 +226,27 @@ function renderContacts(list = contacts) {
   //clear the table body
   contactsBody.innerHTML = "";
 
+  if (!list || list.length === 0) { //shows message of no records found if no contact records are found in list to render
+    const row = document.createElement("tr");
+    row.innerHTML = 
+    `
+      <td colspan="6" style="text-align:center; color:#000; padding:12px;">
+        No records found.
+      </td>
+    `;
+    contactsBody.appendChild(row);
+    return;
+  }
   //go through every contact
   list.forEach(contact => {
     const row = document.createElement("tr");
-
+    
     row.innerHTML = `
       <td>${contact.first_name}</td>
       <td>${contact.last_name}</td>
       <td>${contact.phone_number}</td>
       <td>${contact.email}</td>
+      <td>${contact.creation_date}</td>
       <td>
         <button class="editBtn" data-id="${contact.id}">Edit</button>
         <button class="deleteBtn" data-id="${contact.id}">Delete</button>
@@ -255,20 +310,35 @@ addBtn.onclick = () => {
 
 //search button functionality
 searchBtn.onclick = () => {
-  const query = searchInput.value.toLowerCase();
+  const value = (searchInput.value ?? "").trim();
+  //determine search mode
+  const mode  = (searchMode.value ?? "general");
 
-  if (!query) {
-    renderContacts();
+  //empty search input loads all contacts
+  if (!value) {
+    loadContacts();
     return;
   }
-
-  const filtered = contacts.filter((c) =>
-    (c.first_name ?? "").toLowerCase().includes(query) ||
-    (c.last_name ?? "").toLowerCase().includes(query)
-  );
-
-  renderContacts(filtered);
+  
+  //search contacts based on mode (first, last, or both)
+  if (mode === "first") {
+    searchContacts({ first_name: value });
+  } 
+  else if (mode === "last") {
+    searchContacts({ last_name: value });
+  } 
+  else {
+    searchContacts({ search: value });
+  }
 };
+
+//search by enter key
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    searchBtn.click();
+  }
+});
 
 //logout button functionality
 logoutBtn.onclick = () => {
