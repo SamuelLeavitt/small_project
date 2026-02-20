@@ -139,7 +139,7 @@ button:active {
 
 #contactsTable {
 	border-collapse: collapse;
-	margin: 25px 0 25px 20px;
+	margin: 20px auto 0;	
 	min-width: 800px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* more shadows! */
 	border-radius: 8px; /* Rounded corners */
