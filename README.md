@@ -48,6 +48,3 @@ This is a web-based contact manager built for the COP4331 Small Project assignme
 
 ## License
 Apache License 2.0 — see LICENSE file for details.
-
-## Additional Documentation
-See the `docs/` folder for more details and design notes.
