@@ -225,7 +225,7 @@ body.contacts{
 }
 
 
-.form-styling {
+#formInput {
 	width: 360px;
 	display: flex;
 	flex-direction: column;
@@ -241,7 +241,7 @@ body.contacts{
 }
 
 
-.form-styling  input {
+#formInput input {
 	width: 340px;
 	height: 50px;
 	align-self: center;
@@ -250,16 +250,6 @@ body.contacts{
 	border: 1px solid #000000;
 	border-radius: 6px;
 	box-sizing: border-box;
-}
-
-.form-styling  p:last-of-type {
-	text-align: center;
-}
-
-
-.form-styling  h2 {
-	text-align: center;
-	width: 100%;
 }
 
 
@@ -296,5 +286,40 @@ body.HomePage {
   font-weight: bold;
   margin-top: 10px;
   text-align: center;
+}
+
+.form-styling {
+	width: 360px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+
+	/* Glass Effect */
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(10px);
+
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 15px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.form-styling input {
+	width: 340px;
+	height: 50px;
+	align-self: center;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #000000;
+	border-radius: 6px;
+	box-sizing: border-box;
+}
+
+.form-styling p:last-of-type {
+	text-align: center;
+}
+
+.form-styling h2 {
+	text-align: center;
+	width: 100%;
 }
 
