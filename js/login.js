@@ -1,13 +1,13 @@
 const urlBase = "backend/routes/Auth";
 const extension = "php";
 
-const loginForm = document.getElementById("loginForm");
-const usernameInput = document.getElementById("username");
-const passwordInput = document.getElementById("password");
-const loginMessage = document.getElementById("loginMessage");
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("loginForm");
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
+  const loginMessage = document.getElementById("loginMessage");
 
-if (loginForm) {
-  loginForm.onsubmit = (e) => {
+  loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const username = usernameInput.value.trim();
@@ -41,7 +41,6 @@ if (loginForm) {
       } catch {
         json = null;
       }
-
       if (json && json.success) {
         // Logged in; backend sets user_id cookie. Go to contacts.
         window.location.href = "contacts.html";
@@ -52,5 +51,5 @@ if (loginForm) {
     };
 
     xhr.send(JSON.stringify({ username, password }));
-  };
-}
+  }, true);
+});
